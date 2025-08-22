@@ -29,4 +29,17 @@ public:
         build(a, v + 2 * (tm - tl), tm, tr);
         t[v] = t[v + 1] + t[v + 2 * (tm - tl)];
     }
+    int get_sum(int v, int tl, int tr, int ql, int qr)
+    {
+        if (tr <= ql || qr <= tl)
+        {
+            return 0;
+        }
+        if (ql <= tl && tr <= qr)
+        {
+            return t[v];
+        }
+        int tm = (tr + tl) / 2;
+        return get_sum(v + 1, tl, tm, ql, qr) + get_sum(v + 2 * (tm - tl), tm, tr, ql, qr);
+        }
 };
