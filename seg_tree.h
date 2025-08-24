@@ -54,4 +54,26 @@ public:
 
         return get_sum_subtree(v + 1, tl, tm, ql, qr) + get_sum_subtree(v + 2 * (tm - tl), tm, tr, ql, qr);
     }
+    void update(int pos, T x)
+    {
+        pos--;
+        update_subtree(0, 0, n, pos, x);
+    }
+    void update_subtree(int v, int tl, int tr, int pos, T x)
+    {
+        t[v] += x;
+        if (tr - tl == 1)
+        {
+            return;
+        }
+        int tm = (tl + tr) / 2;
+        if (pos < tm)
+        {
+            update_subtree(v + 1, tl, tm, pos, x);
+        }
+        else
+        {
+            update_subtree(v + 2 * (tm - tl), tm, tr, pos, x);
+        }
+    }
 };
